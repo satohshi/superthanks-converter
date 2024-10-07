@@ -24,11 +24,11 @@ var CURRENCY = 'YOUR_CURRENCY' // ISO 4217 currency code (e.g. JPY)
 
 Create `.env` file in the root directory with the following content:
 
-| Variable   | Description                       |
-| ---------- | --------------------------------- |
-| `API_KEY`  | ExchangeRate-API key              |
-| `LOCALE`   | BCP 47 language tag (e.g. ja-JP)  |
-| `CURRENCY` | ISO 4217 currency code (e.g. JPY) |
+| Variable   | Description                         |
+| ---------- | ----------------------------------- |
+| `API_KEY`  | ExchangeRate-API key                |
+| `LOCALE`   | BCP 47 language tag (e.g. `ja-JP`)  |
+| `CURRENCY` | ISO 4217 currency code (e.g. `JPY`) |
 
 Then run:
 
