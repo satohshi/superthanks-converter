@@ -1,0 +1,21 @@
+{
+	"name": "superthanks-converter",
+	"version": "1.0.0",
+	"description": "Display SuperThanks in your preferred currency",
+	"type": "module",
+	"main": "index.js",
+	"scripts": {
+		"dev": "node ./scripts/build.js --dev",
+		"build": "node ./scripts/build.js",
+		"format": "prettier --write ."
+	},
+	"keywords": [],
+	"author": "Satohshi",
+	"license": "MIT",
+	"devDependencies": {
+		"dotenv": "^16.4.5",
+		"esbuild": "^0.24.0",
+		"prettier": "^3.3.3",
+		"typescript": "^5.6.2"
+	}
+}
