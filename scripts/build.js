@@ -29,6 +29,7 @@ const generateMetadata = () => {
 
 const args = process.argv.slice(2)
 
+/** @type {import("esbuild").BuildOptions} */
 const BUILD_OPTIONS = {
 	entryPoints: ['src/index.ts'],
 	bundle: true,
