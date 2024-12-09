@@ -1,10 +1,11 @@
-import { CURRENCY_SYMBOL_MAP, API_KEY, CURRENCY, LOCALE } from './constants.js'
+import { CURRENCY_SYMBOL_MAP, CURRENCY, LOCALE } from './constants.js'
 
 const exchangeRates = await (async () => {
-	const response = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${CURRENCY}`)
+	const url = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${CURRENCY.toLowerCase()}.json`
+	const response = await fetch(url)
 	const json = await response.json()
-	const rates = json.conversion_rates
-	return new Map<string, number>(Object.entries(rates))
+	const rates = json[CURRENCY.toLowerCase()] as Record<string, number>
+	return new Map(Object.entries(rates).map(([k, v]) => [k.toUpperCase(), v]))
 })()
 
 const currencyFormatter = new Intl.NumberFormat(LOCALE, { style: 'currency', currency: CURRENCY })
