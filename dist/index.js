@@ -12,7 +12,6 @@
 ;(async () => {
 
 // src/constants.ts
-var API_KEY = "YOUR_API_KEY";
 var CURRENCY = "YOUR_CURRENCY";
 var LOCALE = "YOUR_LOCALE";
 var CURRENCY_SYMBOL_MAP = {
@@ -28,10 +27,11 @@ var CURRENCY_SYMBOL_MAP = {
 
 // src/convert.ts
 var exchangeRates = await (async () => {
-  const response = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${CURRENCY}`);
+  const url = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${CURRENCY.toLowerCase()}.json`;
+  const response = await fetch(url);
   const json = await response.json();
-  const rates = json.conversion_rates;
-  return new Map(Object.entries(rates));
+  const rates = json[CURRENCY.toLowerCase()];
+  return new Map(Object.entries(rates).map(([k, v]) => [k.toUpperCase(), v]));
 })();
 var currencyFormatter = new Intl.NumberFormat(LOCALE, { style: "currency", currency: CURRENCY });
 var parseAndConvert = (inputText) => {

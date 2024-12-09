@@ -1,4 +1,3 @@
-export const API_KEY = _API_KEY
 export const CURRENCY = _CURRENCY
 export const LOCALE = _LOCALE
 
