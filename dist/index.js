@@ -124,16 +124,13 @@ onPathChange();
 if ("onurlchange" in window) {
   window.addEventListener("urlchange", ({ url }) => onPathChange(url));
 } else {
-  const softNavigationObserver = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.type === "attributes" && mutation.target.classList.contains("loaded") && pathBefore !== window.location.href) {
-        onPathChange();
-      }
-    });
+  const softNavigationObserver = new MutationObserver(() => {
+    if (pathBefore !== window.location.href) {
+      onPathChange();
+    }
   });
-  waitForElement("ytcp-entity-page#entity-page.loaded", (main) => {
-    softNavigationObserver.observe(main, { attributeFilter: ["class"] });
-  });
+  const titleElement = document.querySelector("title");
+  softNavigationObserver.observe(titleElement, { childList: true });
 }
 
 })();

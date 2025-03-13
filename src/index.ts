@@ -46,21 +46,12 @@ if ('onurlchange' in window) {
 	window.addEventListener('urlchange', ({ url }) => onPathChange(url))
 } else {
 	// For other UserScript managers
-	const softNavigationObserver = new MutationObserver((mutations) => {
-		mutations.forEach((mutation) => {
-			if (
-				mutation.type === 'attributes' &&
-				(mutation.target as HTMLElement).classList.contains('loaded') &&
-				pathBefore !== window.location.href
-			) {
-				onPathChange()
-			}
-		})
+	const softNavigationObserver = new MutationObserver(() => {
+		if (pathBefore !== window.location.href) {
+			onPathChange()
+		}
 	})
 
-	// "ytcp-entity-page#entity-page" is the main container for the page.
-	// It switches class between "loaded" and "loading" when navigating (and some other changes in the DOM).
-	waitForElement('ytcp-entity-page#entity-page.loaded', (main) => {
-		softNavigationObserver.observe(main, { attributeFilter: ['class'] })
-	})
+	const titleElement = document.querySelector('title')!
+	softNavigationObserver.observe(titleElement, { childList: true })
 }
